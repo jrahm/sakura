@@ -601,7 +601,6 @@ sakura_key_press (GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 			return TRUE;
 		}
 	}
-
 	/* F11 (fullscreen) pressed */
 	if (keycode==sakura_tokeycode(sakura.fullscreen_key)){
 		sakura_fullscreen(NULL, NULL);
@@ -849,7 +848,7 @@ sakura_button_press(GtkWidget *widget, GdkEventButton *button_event, gpointer us
 	}
 
 	/* Right button: show the popup menu */
-	if (button_event->button == 3) {
+	if (button_event->button == 3 && (button_event->state & sakura.open_url_accelerator) == sakura.open_url_accelerator) {
 		GtkMenu *menu;
 		menu = GTK_MENU (widget);
 
@@ -931,7 +930,6 @@ sakura_decrease_font (GtkWidget *widget, void *data)
 		sakura_set_config_string("font", pango_font_description_to_string(sakura.font));
 	}
 }
-
 
 static void
 sakura_child_exited (GtkWidget *widget, void *data)
